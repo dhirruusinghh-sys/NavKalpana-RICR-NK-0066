@@ -12,11 +12,6 @@ exports.register = async (req, res) => {
   }
 };
 
-<<<<<<< HEAD
-=======
-//file
-
->>>>>>> eb86250e8d4fc78104a086de5be98189f1eafaf3
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;

@@ -8,11 +8,6 @@ const db = mysql.createConnection({
   database: process.env.DB_NAME,
 });
 
-<<<<<<< HEAD
-=======
-//add
-
->>>>>>> eb86250e8d4fc78104a086de5be98189f1eafaf3
 db.connect((err) => {
   if (err) {
     console.error("Database connection failed:", err);
