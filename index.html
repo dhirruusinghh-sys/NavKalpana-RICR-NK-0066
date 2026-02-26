@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Health Profile Setup</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #084f47;
+  --primary-light: #0d6b60;
+  --bg: #f4f8f7;
+  --card: #ffffff;
+  --text: #1f2d2b;
+  --border: #e0ecea;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  padding: 40px 15px;
+}
+
+.container {
+  width: 100%;
+  max-width: 650px;
+  background: var(--card);
+  padding: 35px;
+  border-radius: 14px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+h2 {
+  text-align: center;
+  color: var(--primary);
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.section {
+  margin-bottom: 25px;
+}
+
+.section h3 {
+  font-size: 16px;
+  color: var(--primary);
+  margin-bottom: 15px;
+  border-left: 4px solid var(--primary);
+  padding-left: 10px;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+input, select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+input:focus, select:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(8,79,71,0.1);
+}
+
+.radio-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.radio-group label {
+  background: #f0f7f6;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  border: 1px solid transparent;
+  transition: 0.2s;
+}
+
+.radio-group input {
+  margin-right: 6px;
+}
+
+.radio-group label:hover {
+  border-color: var(--primary);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 25px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background: var(--primary-light);
+  transform: translateY(-1px);
+}
+
+.results {
+  margin-top: 30px;
+  background: #f0f7f6;
+  padding: 20px;
+  border-radius: 12px;
+  display: none;
+}
+
+.results h3 {
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.results p {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.results strong {
+  color: var(--primary);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>Health & Goal Profile Setup</h2>
+
+  <form id="healthForm">
+
+    <div class="section">
+      <h3>Basic Information</h3>
+
+      <label>Age</label>
+      <input type="number" id="age" required>
+
+      <label>Biological Sex</label>
+      <select id="sex" required>
+        <option value="">Select</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+
+      <label>Height (cm)</label>
+      <input type="number" id="height" required>
+
+      <label>Current Weight (kg)</label>
+      <input type="number" id="weight" required>
+    </div>
+
+    <div class="section">
+      <h3>Lifestyle</h3>
+
+      <label>Activity Level</label>
+      <select id="activity" required>
+        <option value="">Select</option>
+        <option value="1.2">Sedentary</option>
+        <option value="1.375">Lightly Active</option>
+        <option value="1.55">Moderately Active</option>
+        <option value="1.725">Very Active</option>
+      </select>
+
+      <label>Experience Level</label>
+      <select required>
+        <option value="">Select</option>
+        <option>Beginner</option>
+        <option>Intermediate</option>
+        <option>Advanced</option>
+      </select>
+    </div>
+
+    <div class="section">
+      <h3>Primary Goal</h3>
+      <div class="radio-group">
+        <label><input type="radio" name="goal" value="loss" required> Weight Loss</label>
+        <label><input type="radio" name="goal" value="gain"> Muscle Gain</label>
+        <label><input type="radio" name="goal" value="recomp"> Body Recomposition</label>
+        <label><input type="radio" name="goal" value="maintain"> Maintain</label>
+        <label><input type="radio" name="goal" value="endurance"> Improve Endurance</label>
+      </div>
+    </div>
+
+    <button type="submit">Calculate Plan</button>
+  </form>
+
+  <div class="results" id="results">
+    <h3>Your Results</h3>
+    <p><strong>BMI:</strong> <span id="bmi"></span></p>
+    <p><strong>Maintenance Calories:</strong> <span id="maintenance"></span> kcal/day</p>
+    <p><strong>Suggested Calorie Target:</strong> <span id="target"></span> kcal/day</p>
+    <p><strong>Safety Floor:</strong> Women → 1200 kcal | Men → 1500 kcal</p>
+  </div>
+
+</div>
+
+<script>
+document.getElementById("healthForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const age = parseInt(document.getElementById("age").value);
+  const sex = document.getElementById("sex").value;
+  const height = parseInt(document.getElementById("height").value);
+  const weight = parseInt(document.getElementById("weight").value);
+  const activity = parseFloat(document.getElementById("activity").value);
+  const goal = document.querySelector('input[name="goal"]:checked').value;
+
+  const bmi = (weight / ((height/100) ** 2)).toFixed(2);
+
+  let bmr = sex === "male"
+    ? (10 * weight) + (6.25 * height) - (5 * age) + 5
+    : (10 * weight) + (6.25 * height) - (5 * age) - 161;
+
+  const maintenance = Math.round(bmr * activity);
+
+  let target = maintenance;
+
+  if (goal === "loss") target -= 500;
+  if (goal === "gain") target += 300;
+  if (goal === "recomp") target -= 200;
+  if (goal === "endurance") target += 200;
+
+  if (sex === "female" && target < 1200) target = 1200;
+  if (sex === "male" && target < 1500) target = 1500;
+
+  document.getElementById("bmi").innerText = bmi;
+  document.getElementById("maintenance").innerText = maintenance;
+  document.getElementById("target").innerText = target;
+
+  document.getElementById("results").style.display = "block";
+});
+</script>
+
+</body>
+</html>
