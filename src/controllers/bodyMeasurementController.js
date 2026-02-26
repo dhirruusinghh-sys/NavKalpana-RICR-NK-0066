@@ -1,6 +1,6 @@
 const service = require("../services/bodyMeasurementService");
 
-// ✅ Create
+
 exports.createMeasurement = async (req, res) => {
   try {
     const data = await service.addMeasurement(req.body);
@@ -20,7 +20,7 @@ exports.createMeasurement = async (req, res) => {
 };
 
 
-// ✅ Get
+
 exports.getMeasurements = async (req, res) => {
   try {
     const data = await service.getMeasurementAnalytics(req.params.user_id);

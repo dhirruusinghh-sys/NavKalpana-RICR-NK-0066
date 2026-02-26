@@ -16,7 +16,7 @@ exports.createProgress = async (req, res) => {
   }
 };
 
-// GET API
+
 exports.getProgress = async (req, res) => {
   try {
     const user_id = req.params.user_id;
